@@ -5,6 +5,7 @@ const port = 3004;
 const login = require('./route/Login');
 const signup = require('./route/Signup');
 
+app.use(express.json());
 app.use(session({
     secret: 'nodejs-endpoints',
     resave: false,
