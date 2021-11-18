@@ -1,0 +1,20 @@
+{
+  "name": "nodejs-endpoints",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Rishu2000/nodejs-endpoints.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Rishu2000/nodejs-endpoints/issues"
+  },
+  "homepage": "https://github.com/Rishu2000/nodejs-endpoints#readme"
+}
