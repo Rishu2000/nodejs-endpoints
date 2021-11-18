@@ -20,6 +20,7 @@
   "homepage": "https://github.com/Rishu2000/nodejs-endpoints#readme",
   "dependencies": {
     "express": "^4.17.1",
+    "express-session": "^1.17.2",
     "knex": "^0.95.14",
     "nodemon": "^2.0.15",
     "pg": "^8.7.1"
