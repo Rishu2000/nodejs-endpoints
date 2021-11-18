@@ -1,5 +1,6 @@
 const express = require('express');
 const signup = express();
+const {knex} = require('../pg/connection');
 
 signup.use((req,res,next) => {
     const {Authentication} = req.session;
@@ -18,7 +19,37 @@ signup.get('/', (req, res) => {
 })
 
 signup.post('/', (req, res) => {
-    res.json('eererge');
+    const {username,password,role} = req.body;
+    if(!password || !username){
+        req.session.destroy();
+        res.status(400).json({
+            Success:false,
+            Message:"Username and Password are required."
+        });
+    }else{
+        knex('users')
+        .where({username: username})
+        .then((rows) => {
+            if(rows.length > 0){
+                req.session.destroy();
+                res.status(406).json({
+                    Success: false,
+                    Message:"username already exist."
+                })
+            }else{
+                knex('users')
+                .insert({username:username, password:password, role:role})
+                .then(() => {
+                    req.session.Authentication = req.body;
+                    res.status(201).json({
+                        Success: true,
+                        Message:`${username} has been created.`
+                    });
+                    console.log(req.session);
+                })
+            }
+        })
+    }
 })
 
 module.exports = signup;
