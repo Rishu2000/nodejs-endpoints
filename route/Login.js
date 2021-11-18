@@ -1,6 +1,8 @@
 const express = require('express');
 const login = express();
-const {knex} = require('../pg/connection')
+const {knex} = require('../pg/connection');
+const viewOrders = require('./products/ViewOrders');
+const myOrders = require('./products/myOrders');
 
 login.use((req,res,next) => {
     const {Authentication} = req.session;
@@ -13,6 +15,8 @@ login.use((req,res,next) => {
         })
     }
 })
+login.use('/allProducts',viewOrders);
+login.use('/myOrders',myOrders);
 
 login.get('/', (req, res) => {
     res.json(req.session.Authentication);

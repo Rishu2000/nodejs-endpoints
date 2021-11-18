@@ -40,10 +40,10 @@ signup.post('/', (req, res) => {
                 knex('users')
                 .insert({username:username, password:password, role:role})
                 .then(() => {
-                    req.session.Authentication = req.body;
+                    // req.session.Authentication = req.body;
                     res.status(201).json({
                         Success: true,
-                        Message:`${username} has been created.`
+                        Message:`${username} has been created. Please, login to get started.`
                     });
                     console.log(req.session);
                 })
