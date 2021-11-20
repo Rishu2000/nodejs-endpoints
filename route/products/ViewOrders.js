@@ -2,6 +2,25 @@ const express = require('express');
 const viewOrders = express();
 const {knex} = require('../../pg/connection');
 
+viewOrders.get('/:id', (req, res) => {
+    knex('products')
+        .then((rows) => {
+            const order = rows.find((row) => row.id === +req.params.id);
+            if(order){
+                res.json({
+                    Success: true,
+                    Message: `your order was successfully placed.`,
+                    order: order
+                })
+            }else{
+                res.status(401).json({
+                    Success: false,
+                    Message: `Order not found. Please try again later...`
+                })
+            }
+        })
+})
+
 viewOrders.get('/', (req, res) => {
     knex('products')
         .then((rows) => {
