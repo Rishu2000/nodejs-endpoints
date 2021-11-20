@@ -1,5 +1,6 @@
 const express = require('express');
 const viewOrders = express();
+const cart = require('../../constants/Cart');
 const {knex} = require('../../pg/connection');
 
 viewOrders.get('/:id', (req, res) => {
@@ -7,6 +8,7 @@ viewOrders.get('/:id', (req, res) => {
         .then((rows) => {
             const order = rows.find((row) => row.id === +req.params.id);
             if(order){
+                cart.push(order);
                 res.json({
                     Success: true,
                     Message: `your order was successfully placed.`,
